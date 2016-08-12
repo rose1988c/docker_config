@@ -1,0 +1,78 @@
+data:
+  image: busybox
+  volumes:
+    - /opt/www:/opt/www
+
+nginx:
+  build: images/nginx
+  ports:
+    - "80:80"
+  net: host
+  volumes:
+    - ./images/nginx/conf.d:/etc/nginx/conf.d
+    - ./volumes/logs/nginx:/var/log/nginx
+  volumes_from:
+    - data
+  env_file: .env
+
+php:
+  build: images/php
+  net: host
+  ports:
+    - "9000:9000"
+  volumes_from:
+    - data
+  working_dir: /opt/www
+  env_file: .env
+  #extra_hosts:
+  #  - "test.box.imeete.com:192.168.138.129"
+
+#php7:
+#  build: images/php7
+#  net: host
+#  volumes_from:
+#    - data
+#  working_dir: /opt/www
+#  env_file: .env
+  #extra_hosts:
+  #  - "test.box.imeete.com:192.168.138.129"
+#node:
+#  build: images/node
+#  volumes_from:
+#    - data
+#  ports:
+#    - "8080:8080"
+#  net: host
+#  working_dir: /opt/node-deploy
+#  env_file: .env
+  #extra_hosts:
+  #  - "test.box.imeete.com:192.168.138.129"
+
+#memcache:
+#   build: images/memcache
+#   ports:
+#     - "11211:11211"
+
+mysql:
+   build: images/mysql
+   ports:
+     - "3306:3306"
+   volumes:
+     - ./volumes/data/mysql:/var/lib/mysql
+   env_file: .env
+
+# mongo:
+#   build: images/mongo
+#   ports:
+#     - "27017:27017"
+
+#ssdb:
+#   build: images/ssdb
+#   ports:
+#     - "16379:16379"
+#   env_file: .env
+
+redis:
+   build: images/redis
+   ports:
+     - "6379:6379"
