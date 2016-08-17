@@ -1,7 +1,7 @@
 data:
   image: busybox
   volumes:
-    - /opt/www:/opt/www
+    - /data/www:/data/www
 
 nginx:
   build: images/nginx
@@ -22,7 +22,7 @@ php:
     - "9000:9000"
   volumes_from:
     - data
-  working_dir: /opt/www
+  working_dir: /data/www
   env_file: .env
   #extra_hosts:
   #  - "test.box.imeete.com:192.168.138.129"
@@ -32,7 +32,7 @@ php:
 #  net: host
 #  volumes_from:
 #    - data
-#  working_dir: /opt/www
+#  working_dir: /data/www
 #  env_file: .env
   #extra_hosts:
   #  - "test.box.imeete.com:192.168.138.129"

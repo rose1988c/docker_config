@@ -2,7 +2,7 @@ FROM nginx:1.9
 
 COPY ./nginx.conf /etc/nginx/
 
-RUN usermod -u 1000 www-data && mkdir /opt/www && chown -R www-data.www-data /opt/www
+RUN usermod -u 1000 www-data && mkdir /data/www && chown -R www-data.www-data /data/www
 
 EXPOSE 80
-VOLUME ["/opt/www", "/var/log/nginx", "/etc/nginx/conf.d"]
+VOLUME ["/data/www", "/var/log/nginx", "/etc/nginx/conf.d"]

@@ -69,8 +69,8 @@ RUN cp /tmp/composer.phar /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer && \
     usermod -u 1000 www-data
 
-VOLUME ["/opt/www"]
+VOLUME ["/data/www"]
 
-RUN chmod +x /opt/www/live_server_seeker/bin/start.sh
+RUN chmod +x /data/www/live_server_seeker/bin/start.sh
 
-CMD [ "/bin/bash", "/opt/www/live_server_seeker/bin/start.sh" ]
+CMD [ "/bin/bash", "/data/www/live_server_seeker/bin/start.sh" ]

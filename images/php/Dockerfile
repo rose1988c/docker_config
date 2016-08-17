@@ -69,4 +69,4 @@ RUN cp /tmp/composer.phar /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer && \
     usermod -u 1000 www-data
 
-VOLUME ["/opt/www"]
+VOLUME ["/data/www"]

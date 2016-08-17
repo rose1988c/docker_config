@@ -1,3 +1,9 @@
+
+api: ele.168home.net
+www: ele.local
+redis: 6379
+mysql: root ele_2016
+
 # When up
 #!/bin/sh
 /usr/bin/docker daemon -D -g /var/lib/docker -H unix:// -H tcp://0.0.0.0:2376 --registry-mirror=https://docker.mirrors.ustc.edu.cn
