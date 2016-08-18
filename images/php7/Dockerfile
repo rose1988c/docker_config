@@ -63,6 +63,6 @@ RUN usermod -u 1000 www-data
 
 CMD ["php-fpm", "-F"]
 
-WORKDIR /data/www
+WORKDIR /opt/www
 
-VOLUME ["/data/www"]
+VOLUME ["/opt/www"]
