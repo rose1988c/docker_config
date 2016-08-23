@@ -23,6 +23,11 @@ RUN apt-get update && apt-get install -y \
       supervisor \
       && apt-get clean && rm -r /var/lib/apt/lists/*
 
+# supervisor
+RUN apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 # Install modules
 RUN docker-php-ext-configure gd \
       --with-freetype-dir=/usr/include/ \
@@ -59,6 +64,14 @@ RUN cd /home \
      && mv cphalcon-* phalcon \
      && cd phalcon/build && ./install
 
+# node
+RUN cd /home \
+     && tar -xvf /tmp/node-v6.4.0-linux-x64.tar.gz \
+     && mv node-* node \
+     && ln -s /home/node/bin/* /usr/local/bin/ \
+     && npm install -g pm2 --registry=https://registry.npm.taobao.org \
+     && ln -s /home/node/bin/pm2 /usr/local/bin/
+
 # PHP config
 COPY ./php.ini /usr/local/etc/php/php.ini
 COPY ./php-fpm.conf /usr/local/etc/php-fpm.conf
@@ -70,3 +83,7 @@ RUN cp /tmp/composer.phar /usr/local/bin/composer && \
     usermod -u 1000 www-data
 
 VOLUME ["/opt/www"]
+
+EXPOSE 9000
+
+CMD ["/usr/bin/supervisord"]
