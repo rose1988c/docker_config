@@ -1,3 +1,2 @@
 #!/bin/bash
-btsync --config /etc/btsync.json ;
-pm2 logs
+# pm2 logs

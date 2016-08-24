@@ -1,18 +1,19 @@
-FROM node:5.8
+FROM node:6.4
 
-COPY ./npmrc /root/.npmrc
-COPY ./sources.list /etc/apt/sources.list
+COPY ./config/npmrc /root/.npmrc
+COPY ./config/sources.list /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y git vim libkrb5-dev && \
+RUN apt-get update && \
     apt-get clean && \
     npm install -g pm2
 
-COPY ./package.json /opt/node-deploy/package.json
-RUN cd /opt/node-deploy && npm install
+RUN cd /opt/www/n.aacc.in && npm install
 
-COPY ./bin/btsync /usr/bin/btsync
-RUN chmod a+x /usr/bin/btsync
+# supervisor
+RUN apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-WORKDIR /opt/node-deploy
+VOLUME ["/opt/www"]
 
-CMD [ "pm2", "logs" ]
+CMD ["/usr/bin/supervisord"]
