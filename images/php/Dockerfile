@@ -2,7 +2,7 @@ FROM php:5.6-fpm
 
 # Install env
 COPY ./pkg/* /tmp/
-RUN cp /tmp/sources.list /etc/apt/sources.list
+# RUN cp /tmp/sources.list /etc/apt/sources.list
 RUN apt-get update && apt-get install -y \
       git \
       g++ \

@@ -1,7 +1,7 @@
 FROM node:6.4
 
-COPY ./config/npmrc /root/.npmrc
-COPY ./config/sources.list /etc/apt/sources.list
+# COPY ./config/npmrc /root/.npmrc
+# COPY ./config/sources.list /etc/apt/sources.list
 
 RUN apt-get update && \
     apt-get clean && \

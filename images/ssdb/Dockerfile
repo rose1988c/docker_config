@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Set the env variable DEBIAN_FRONTEND to noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY ./sources.list /etc/apt/sources.list
+# COPY ./sources.list /etc/apt/sources.list
 
 RUN apt-get update && \
   apt-get install -y --force-yes git make gcc g++ && apt-get clean && \
